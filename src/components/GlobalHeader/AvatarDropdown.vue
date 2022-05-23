@@ -1,11 +1,3 @@
-<!--
- * @Author: your name
- * @Date: 2021-08-24 11:28:34
- * @LastEditTime: 2022-04-20 10:01:27
- * @LastEditors: Please set LastEditors
- * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- * @FilePath: \ant-design-vue-pro\src\components\GlobalHeader\AvatarDropdown.vue
--->
 <template>
   <div>
     <a-dropdown v-if="currentUser && currentUser.name" placement="bottomRight">

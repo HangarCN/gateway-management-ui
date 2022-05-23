@@ -1,31 +1,35 @@
 /* eslint-disable */
-import axios from 'axios'
-import qs from 'qs'
-let domain = ''
+import axios from 'axios';
+import qs from 'qs';
+let domain = '';
 export const getDomain = () => {
-  return domain
-}
+  return domain;
+};
 export const setDomain = ($domain) => {
-  domain = $domain
-}
+  domain = $domain;
+};
 export const request = (method, url, body, queryParameters, form, config) => {
-  method = method.toLowerCase()
-  let keys = Object.keys(queryParameters)
-  let queryUrl = url
+  method = method.toLowerCase();
+  let keys = Object.keys(queryParameters);
+  let queryUrl = url;
   if (keys.length > 0) {
-    queryUrl = url + '?' + qs.stringify(queryParameters)
+    queryUrl = url + '?' + qs.stringify(queryParameters);
   }
   // let queryUrl = url+(keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '')
   if (body) {
-    return axios[method](queryUrl, body, config)
+    return axios[method](queryUrl, body, config);
   } else if (method === 'get') {
-    return axios[method](queryUrl, {
-      params: form
-    }, config)
+    return axios[method](
+      queryUrl,
+      {
+        params: form
+      },
+      config
+    );
   } else {
-    return axios[method](queryUrl, qs.stringify(form), config)
+    return axios[method](queryUrl, qs.stringify(form), config);
   }
-}
+};
 /*==========================================================
  *                    系统接口文档，如果需要，可以覆盖Swagger配置进行自定义配置
  ==========================================================*/
@@ -45,92 +49,96 @@ export const request = (method, url, body, queryParameters, form, config) => {
  * @param searchUri - 查询条件:资源标识符，模糊查询
  * @param sort - 排序规则，格式: 字段名[,asc|desc]，默认升序，支持多字段排序
  */
-export const listGatewayRoutes = function(parameters = {}) {
-  const domain = parameters.$domain ? parameters.$domain : getDomain()
-  const config = parameters.$config
-  let path = '/gateway-management/api/gateway-routes'
-  let body
-  let queryParameters = {}
-  let form = {}
+export const listGatewayRoutes = function (parameters = {}) {
+  const domain = parameters.$domain ? parameters.$domain : getDomain();
+  const config = parameters.$config;
+  let path = '/gateway-management/api/gateway-routes';
+  let body;
+  let queryParameters = {};
+  let form = {};
   if (parameters['pageNumber'] !== undefined) {
-    queryParameters['pageNumber'] = parameters['pageNumber']
+    queryParameters['pageNumber'] = parameters['pageNumber'];
   }
   if (parameters['pageSize'] !== undefined) {
-    queryParameters['pageSize'] = parameters['pageSize']
+    queryParameters['pageSize'] = parameters['pageSize'];
   }
   if (parameters['searchCreateDateBegin'] !== undefined) {
-    queryParameters['search_createDateBegin'] = parameters['searchCreateDateBegin']
+    queryParameters['search_createDateBegin'] = parameters['searchCreateDateBegin'];
   }
   if (parameters['searchCreateDateEnd'] !== undefined) {
-    queryParameters['search_createDateEnd'] = parameters['searchCreateDateEnd']
+    queryParameters['search_createDateEnd'] = parameters['searchCreateDateEnd'];
   }
   if (parameters['searchIsEnable'] !== undefined) {
-    queryParameters['search_isEnable'] = parameters['searchIsEnable']
+    queryParameters['search_isEnable'] = parameters['searchIsEnable'];
   }
   if (parameters['searchName'] !== undefined) {
-    queryParameters['search_name'] = parameters['searchName']
+    queryParameters['search_name'] = parameters['searchName'];
   }
   if (parameters['searchResourceId'] !== undefined) {
-    queryParameters['search_resourceId'] = parameters['searchResourceId']
+    queryParameters['search_resourceId'] = parameters['searchResourceId'];
   }
   if (parameters['searchUri'] !== undefined) {
-    queryParameters['search_uri'] = parameters['searchUri']
+    queryParameters['search_uri'] = parameters['searchUri'];
   }
   if (parameters['sort'] !== undefined) {
-    queryParameters['sort'] = parameters['sort']
+    queryParameters['sort'] = parameters['sort'];
   }
   if (parameters.$queryParameters) {
-    Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-      queryParameters[parameterName] = parameters.$queryParameters[parameterName]
+    Object.keys(parameters.$queryParameters).forEach(function (parameterName) {
+      queryParameters[parameterName] = parameters.$queryParameters[parameterName];
     });
   }
-  return request('get', domain + path, body, queryParameters, form, config)
-}
-export const listGatewayRoutes_RAW_URL = function() {
-  return '/gateway-management/api/gateway-routes'
-}
-export const listGatewayRoutes_TYPE = function() {
-  return 'get'
-}
-export const listGatewayRoutesURL = function(parameters = {}) {
-  let queryParameters = {}
-  const domain = parameters.$domain ? parameters.$domain : getDomain()
-  let path = '/gateway-management/api/gateway-routes'
+  return request('get', domain + path, body, queryParameters, form, config);
+};
+export const listGatewayRoutes_RAW_URL = function () {
+  return '/gateway-management/api/gateway-routes';
+};
+export const listGatewayRoutes_TYPE = function () {
+  return 'get';
+};
+export const listGatewayRoutesURL = function (parameters = {}) {
+  let queryParameters = {};
+  const domain = parameters.$domain ? parameters.$domain : getDomain();
+  let path = '/gateway-management/api/gateway-routes';
   if (parameters['pageNumber'] !== undefined) {
-    queryParameters['pageNumber'] = parameters['pageNumber']
+    queryParameters['pageNumber'] = parameters['pageNumber'];
   }
   if (parameters['pageSize'] !== undefined) {
-    queryParameters['pageSize'] = parameters['pageSize']
+    queryParameters['pageSize'] = parameters['pageSize'];
   }
   if (parameters['searchCreateDateBegin'] !== undefined) {
-    queryParameters['search_createDateBegin'] = parameters['searchCreateDateBegin']
+    queryParameters['search_createDateBegin'] = parameters['searchCreateDateBegin'];
   }
   if (parameters['searchCreateDateEnd'] !== undefined) {
-    queryParameters['search_createDateEnd'] = parameters['searchCreateDateEnd']
+    queryParameters['search_createDateEnd'] = parameters['searchCreateDateEnd'];
   }
   if (parameters['searchIsEnable'] !== undefined) {
-    queryParameters['search_isEnable'] = parameters['searchIsEnable']
+    queryParameters['search_isEnable'] = parameters['searchIsEnable'];
   }
   if (parameters['searchName'] !== undefined) {
-    queryParameters['search_name'] = parameters['searchName']
+    queryParameters['search_name'] = parameters['searchName'];
   }
   if (parameters['searchResourceId'] !== undefined) {
-    queryParameters['search_resourceId'] = parameters['searchResourceId']
+    queryParameters['search_resourceId'] = parameters['searchResourceId'];
   }
   if (parameters['searchUri'] !== undefined) {
-    queryParameters['search_uri'] = parameters['searchUri']
+    queryParameters['search_uri'] = parameters['searchUri'];
   }
   if (parameters['sort'] !== undefined) {
-    queryParameters['sort'] = parameters['sort']
+    queryParameters['sort'] = parameters['sort'];
   }
   if (parameters.$queryParameters) {
-    Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-      queryParameters[parameterName] = parameters.$queryParameters[parameterName]
-    })
+    Object.keys(parameters.$queryParameters).forEach(function (parameterName) {
+      queryParameters[parameterName] = parameters.$queryParameters[parameterName];
+    });
   }
-  let keys = Object.keys(queryParameters)
-  return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '')
-}
+  let keys = Object.keys(queryParameters);
+  return (
+    domain +
+    path +
+    (keys.length > 0 ? '?' + keys.map((key) => key + '=' + encodeURIComponent(queryParameters[key])).join('&') : '')
+  );
+};
 /**
  * 成功：code=201，失败：code!=201
  * request: createGatewayRoute
@@ -139,41 +147,45 @@ export const listGatewayRoutesURL = function(parameters = {}) {
  * raw_url: createGatewayRoute_RAW_URL
  * @param body - 网关路由实体参数
  */
-export const createGatewayRoute = function(parameters = {}) {
-  const domain = parameters.$domain ? parameters.$domain : getDomain()
-  const config = parameters.$config
-  let path = '/gateway-management/api/gateway-routes'
-  let body
-  let queryParameters = {}
-  let form = {}
+export const createGatewayRoute = function (parameters = {}) {
+  const domain = parameters.$domain ? parameters.$domain : getDomain();
+  const config = parameters.$config;
+  let path = '/gateway-management/api/gateway-routes';
+  let body;
+  let queryParameters = {};
+  let form = {};
   if (parameters['body'] !== undefined) {
-    body = parameters['body']
+    body = parameters['body'];
   }
   if (parameters.$queryParameters) {
-    Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-      queryParameters[parameterName] = parameters.$queryParameters[parameterName]
+    Object.keys(parameters.$queryParameters).forEach(function (parameterName) {
+      queryParameters[parameterName] = parameters.$queryParameters[parameterName];
     });
   }
-  return request('post', domain + path, body, queryParameters, form, config)
-}
-export const createGatewayRoute_RAW_URL = function() {
-  return '/gateway-management/api/gateway-routes'
-}
-export const createGatewayRoute_TYPE = function() {
-  return 'post'
-}
-export const createGatewayRouteURL = function(parameters = {}) {
-  let queryParameters = {}
-  const domain = parameters.$domain ? parameters.$domain : getDomain()
-  let path = '/gateway-management/api/gateway-routes'
+  return request('post', domain + path, body, queryParameters, form, config);
+};
+export const createGatewayRoute_RAW_URL = function () {
+  return '/gateway-management/api/gateway-routes';
+};
+export const createGatewayRoute_TYPE = function () {
+  return 'post';
+};
+export const createGatewayRouteURL = function (parameters = {}) {
+  let queryParameters = {};
+  const domain = parameters.$domain ? parameters.$domain : getDomain();
+  let path = '/gateway-management/api/gateway-routes';
   if (parameters.$queryParameters) {
-    Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-      queryParameters[parameterName] = parameters.$queryParameters[parameterName]
-    })
+    Object.keys(parameters.$queryParameters).forEach(function (parameterName) {
+      queryParameters[parameterName] = parameters.$queryParameters[parameterName];
+    });
   }
-  let keys = Object.keys(queryParameters)
-  return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '')
-}
+  let keys = Object.keys(queryParameters);
+  return (
+    domain +
+    path +
+    (keys.length > 0 ? '?' + keys.map((key) => key + '=' + encodeURIComponent(queryParameters[key])).join('&') : '')
+  );
+};
 /**
  * 成功：code=0，data对象为网关路由数据，失败：code!=0
  * request: loadGatewayRouteById
@@ -182,43 +194,47 @@ export const createGatewayRouteURL = function(parameters = {}) {
  * raw_url: loadGatewayRouteById_RAW_URL
  * @param id - 网关路由id
  */
-export const loadGatewayRouteById = function(parameters = {}) {
-  const domain = parameters.$domain ? parameters.$domain : getDomain()
-  const config = parameters.$config
-  let path = '/gateway-management/api/gateway-routes/{id}'
-  let body
-  let queryParameters = {}
-  let form = {}
-  path = path.replace('{id}', `${parameters['id']}`)
+export const loadGatewayRouteById = function (parameters = {}) {
+  const domain = parameters.$domain ? parameters.$domain : getDomain();
+  const config = parameters.$config;
+  let path = '/gateway-management/api/gateway-routes/{id}';
+  let body;
+  let queryParameters = {};
+  let form = {};
+  path = path.replace('{id}', `${parameters['id']}`);
   if (parameters['id'] === undefined) {
-    return Promise.reject(new Error('Missing required  parameter: id'))
+    return Promise.reject(new Error('Missing required  parameter: id'));
   }
   if (parameters.$queryParameters) {
-    Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-      queryParameters[parameterName] = parameters.$queryParameters[parameterName]
+    Object.keys(parameters.$queryParameters).forEach(function (parameterName) {
+      queryParameters[parameterName] = parameters.$queryParameters[parameterName];
     });
   }
-  return request('get', domain + path, body, queryParameters, form, config)
-}
-export const loadGatewayRouteById_RAW_URL = function() {
-  return '/gateway-management/api/gateway-routes/{id}'
-}
-export const loadGatewayRouteById_TYPE = function() {
-  return 'get'
-}
-export const loadGatewayRouteByIdURL = function(parameters = {}) {
-  let queryParameters = {}
-  const domain = parameters.$domain ? parameters.$domain : getDomain()
-  let path = '/gateway-management/api/gateway-routes/{id}'
-  path = path.replace('{id}', `${parameters['id']}`)
+  return request('get', domain + path, body, queryParameters, form, config);
+};
+export const loadGatewayRouteById_RAW_URL = function () {
+  return '/gateway-management/api/gateway-routes/{id}';
+};
+export const loadGatewayRouteById_TYPE = function () {
+  return 'get';
+};
+export const loadGatewayRouteByIdURL = function (parameters = {}) {
+  let queryParameters = {};
+  const domain = parameters.$domain ? parameters.$domain : getDomain();
+  let path = '/gateway-management/api/gateway-routes/{id}';
+  path = path.replace('{id}', `${parameters['id']}`);
   if (parameters.$queryParameters) {
-    Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-      queryParameters[parameterName] = parameters.$queryParameters[parameterName]
-    })
+    Object.keys(parameters.$queryParameters).forEach(function (parameterName) {
+      queryParameters[parameterName] = parameters.$queryParameters[parameterName];
+    });
   }
-  let keys = Object.keys(queryParameters)
-  return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '')
-}
+  let keys = Object.keys(queryParameters);
+  return (
+    domain +
+    path +
+    (keys.length > 0 ? '?' + keys.map((key) => key + '=' + encodeURIComponent(queryParameters[key])).join('&') : '')
+  );
+};
 /**
  * 成功：code=200，失败：code!=200
  * request: updateGatewayRoute
@@ -228,46 +244,50 @@ export const loadGatewayRouteByIdURL = function(parameters = {}) {
  * @param body - 网关路由实体参数
  * @param id - 网关路由id
  */
-export const updateGatewayRoute = function(parameters = {}) {
-  const domain = parameters.$domain ? parameters.$domain : getDomain()
-  const config = parameters.$config
-  let path = '/gateway-management/api/gateway-routes/{id}'
-  let body
-  let queryParameters = {}
-  let form = {}
+export const updateGatewayRoute = function (parameters = {}) {
+  const domain = parameters.$domain ? parameters.$domain : getDomain();
+  const config = parameters.$config;
+  let path = '/gateway-management/api/gateway-routes/{id}';
+  let body;
+  let queryParameters = {};
+  let form = {};
   if (parameters['body'] !== undefined) {
-    body = parameters['body']
+    body = parameters['body'];
   }
-  path = path.replace('{id}', `${parameters['id']}`)
+  path = path.replace('{id}', `${parameters['id']}`);
   if (parameters['id'] === undefined) {
-    return Promise.reject(new Error('Missing required  parameter: id'))
+    return Promise.reject(new Error('Missing required  parameter: id'));
   }
   if (parameters.$queryParameters) {
-    Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-      queryParameters[parameterName] = parameters.$queryParameters[parameterName]
+    Object.keys(parameters.$queryParameters).forEach(function (parameterName) {
+      queryParameters[parameterName] = parameters.$queryParameters[parameterName];
     });
   }
-  return request('put', domain + path, body, queryParameters, form, config)
-}
-export const updateGatewayRoute_RAW_URL = function() {
-  return '/gateway-management/api/gateway-routes/{id}'
-}
-export const updateGatewayRoute_TYPE = function() {
-  return 'put'
-}
-export const updateGatewayRouteURL = function(parameters = {}) {
-  let queryParameters = {}
-  const domain = parameters.$domain ? parameters.$domain : getDomain()
-  let path = '/gateway-management/api/gateway-routes/{id}'
-  path = path.replace('{id}', `${parameters['id']}`)
+  return request('put', domain + path, body, queryParameters, form, config);
+};
+export const updateGatewayRoute_RAW_URL = function () {
+  return '/gateway-management/api/gateway-routes/{id}';
+};
+export const updateGatewayRoute_TYPE = function () {
+  return 'put';
+};
+export const updateGatewayRouteURL = function (parameters = {}) {
+  let queryParameters = {};
+  const domain = parameters.$domain ? parameters.$domain : getDomain();
+  let path = '/gateway-management/api/gateway-routes/{id}';
+  path = path.replace('{id}', `${parameters['id']}`);
   if (parameters.$queryParameters) {
-    Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-      queryParameters[parameterName] = parameters.$queryParameters[parameterName]
-    })
+    Object.keys(parameters.$queryParameters).forEach(function (parameterName) {
+      queryParameters[parameterName] = parameters.$queryParameters[parameterName];
+    });
   }
-  let keys = Object.keys(queryParameters)
-  return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '')
-}
+  let keys = Object.keys(queryParameters);
+  return (
+    domain +
+    path +
+    (keys.length > 0 ? '?' + keys.map((key) => key + '=' + encodeURIComponent(queryParameters[key])).join('&') : '')
+  );
+};
 /**
  * 成功：code=0，data对象为结果数据，失败：code!=0
  * request: deleteGatewayRouteById
@@ -276,43 +296,47 @@ export const updateGatewayRouteURL = function(parameters = {}) {
  * raw_url: deleteGatewayRouteById_RAW_URL
  * @param id - 网关路由id
  */
-export const deleteGatewayRouteById = function(parameters = {}) {
-  const domain = parameters.$domain ? parameters.$domain : getDomain()
-  const config = parameters.$config
-  let path = '/gateway-management/api/gateway-routes/{id}'
-  let body
-  let queryParameters = {}
-  let form = {}
-  path = path.replace('{id}', `${parameters['id']}`)
+export const deleteGatewayRouteById = function (parameters = {}) {
+  const domain = parameters.$domain ? parameters.$domain : getDomain();
+  const config = parameters.$config;
+  let path = '/gateway-management/api/gateway-routes/{id}';
+  let body;
+  let queryParameters = {};
+  let form = {};
+  path = path.replace('{id}', `${parameters['id']}`);
   if (parameters['id'] === undefined) {
-    return Promise.reject(new Error('Missing required  parameter: id'))
+    return Promise.reject(new Error('Missing required  parameter: id'));
   }
   if (parameters.$queryParameters) {
-    Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-      queryParameters[parameterName] = parameters.$queryParameters[parameterName]
+    Object.keys(parameters.$queryParameters).forEach(function (parameterName) {
+      queryParameters[parameterName] = parameters.$queryParameters[parameterName];
     });
   }
-  return request('delete', domain + path, body, queryParameters, form, config)
-}
-export const deleteGatewayRouteById_RAW_URL = function() {
-  return '/gateway-management/api/gateway-routes/{id}'
-}
-export const deleteGatewayRouteById_TYPE = function() {
-  return 'delete'
-}
-export const deleteGatewayRouteByIdURL = function(parameters = {}) {
-  let queryParameters = {}
-  const domain = parameters.$domain ? parameters.$domain : getDomain()
-  let path = '/gateway-management/api/gateway-routes/{id}'
-  path = path.replace('{id}', `${parameters['id']}`)
+  return request('delete', domain + path, body, queryParameters, form, config);
+};
+export const deleteGatewayRouteById_RAW_URL = function () {
+  return '/gateway-management/api/gateway-routes/{id}';
+};
+export const deleteGatewayRouteById_TYPE = function () {
+  return 'delete';
+};
+export const deleteGatewayRouteByIdURL = function (parameters = {}) {
+  let queryParameters = {};
+  const domain = parameters.$domain ? parameters.$domain : getDomain();
+  let path = '/gateway-management/api/gateway-routes/{id}';
+  path = path.replace('{id}', `${parameters['id']}`);
   if (parameters.$queryParameters) {
-    Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-      queryParameters[parameterName] = parameters.$queryParameters[parameterName]
-    })
+    Object.keys(parameters.$queryParameters).forEach(function (parameterName) {
+      queryParameters[parameterName] = parameters.$queryParameters[parameterName];
+    });
   }
-  let keys = Object.keys(queryParameters)
-  return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '')
-}
+  let keys = Object.keys(queryParameters);
+  return (
+    domain +
+    path +
+    (keys.length > 0 ? '?' + keys.map((key) => key + '=' + encodeURIComponent(queryParameters[key])).join('&') : '')
+  );
+};
 /**
 * 排序字段：code,name,url,method,description,parent.id,parent.code,
 parent.name,sortIndex,isEnable,createTime
@@ -336,122 +360,126 @@ parent.name,sortIndex,isEnable,createTime
      * @param searchUrl - 查询条件:后台接口地址，模糊匹配
      * @param sort - 排序规则，格式: 字段名[,asc|desc]，默认升序，支持多字段排序
 */
-export const listApis = function(parameters = {}) {
-  const domain = parameters.$domain ? parameters.$domain : getDomain()
-  const config = parameters.$config
-  let path = '/gateway-management/api/interfaces'
-  let body
-  let queryParameters = {}
-  let form = {}
+export const listApis = function (parameters = {}) {
+  const domain = parameters.$domain ? parameters.$domain : getDomain();
+  const config = parameters.$config;
+  let path = '/gateway-management/api/interfaces';
+  let body;
+  let queryParameters = {};
+  let form = {};
   if (parameters['pageNumber'] !== undefined) {
-    queryParameters['pageNumber'] = parameters['pageNumber']
+    queryParameters['pageNumber'] = parameters['pageNumber'];
   }
   if (parameters['pageSize'] !== undefined) {
-    queryParameters['pageSize'] = parameters['pageSize']
+    queryParameters['pageSize'] = parameters['pageSize'];
   }
   if (parameters['searchCode'] !== undefined) {
-    queryParameters['search_code'] = parameters['searchCode']
+    queryParameters['search_code'] = parameters['searchCode'];
   }
   if (parameters['searchCreateDateBegin'] !== undefined) {
-    queryParameters['search_createDateBegin'] = parameters['searchCreateDateBegin']
+    queryParameters['search_createDateBegin'] = parameters['searchCreateDateBegin'];
   }
   if (parameters['searchCreateDateEnd'] !== undefined) {
-    queryParameters['search_createDateEnd'] = parameters['searchCreateDateEnd']
+    queryParameters['search_createDateEnd'] = parameters['searchCreateDateEnd'];
   }
   if (parameters['searchDescription'] !== undefined) {
-    queryParameters['search_description'] = parameters['searchDescription']
+    queryParameters['search_description'] = parameters['searchDescription'];
   }
   if (parameters['searchIsEnable'] !== undefined) {
-    queryParameters['search_isEnable'] = parameters['searchIsEnable']
+    queryParameters['search_isEnable'] = parameters['searchIsEnable'];
   }
   if (parameters['searchMethod'] !== undefined) {
-    queryParameters['search_method'] = parameters['searchMethod']
+    queryParameters['search_method'] = parameters['searchMethod'];
   }
   if (parameters['searchName'] !== undefined) {
-    queryParameters['search_name'] = parameters['searchName']
+    queryParameters['search_name'] = parameters['searchName'];
   }
   if (parameters['searchParentCode'] !== undefined) {
-    queryParameters['search_parentCode'] = parameters['searchParentCode']
+    queryParameters['search_parentCode'] = parameters['searchParentCode'];
   }
   if (parameters['searchParentId'] !== undefined) {
-    queryParameters['search_parentId'] = parameters['searchParentId']
+    queryParameters['search_parentId'] = parameters['searchParentId'];
   }
   if (parameters['searchParentName'] !== undefined) {
-    queryParameters['search_parentName'] = parameters['searchParentName']
+    queryParameters['search_parentName'] = parameters['searchParentName'];
   }
   if (parameters['searchUrl'] !== undefined) {
-    queryParameters['search_url'] = parameters['searchUrl']
+    queryParameters['search_url'] = parameters['searchUrl'];
   }
   if (parameters['sort'] !== undefined) {
-    queryParameters['sort'] = parameters['sort']
+    queryParameters['sort'] = parameters['sort'];
   }
   if (parameters.$queryParameters) {
-    Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-      queryParameters[parameterName] = parameters.$queryParameters[parameterName]
+    Object.keys(parameters.$queryParameters).forEach(function (parameterName) {
+      queryParameters[parameterName] = parameters.$queryParameters[parameterName];
     });
   }
-  return request('get', domain + path, body, queryParameters, form, config)
-}
-export const listApis_RAW_URL = function() {
-  return '/gateway-management/api/interfaces'
-}
-export const listApis_TYPE = function() {
-  return 'get'
-}
-export const listApisURL = function(parameters = {}) {
-  let queryParameters = {}
-  const domain = parameters.$domain ? parameters.$domain : getDomain()
-  let path = '/gateway-management/api/interfaces'
+  return request('get', domain + path, body, queryParameters, form, config);
+};
+export const listApis_RAW_URL = function () {
+  return '/gateway-management/api/interfaces';
+};
+export const listApis_TYPE = function () {
+  return 'get';
+};
+export const listApisURL = function (parameters = {}) {
+  let queryParameters = {};
+  const domain = parameters.$domain ? parameters.$domain : getDomain();
+  let path = '/gateway-management/api/interfaces';
   if (parameters['pageNumber'] !== undefined) {
-    queryParameters['pageNumber'] = parameters['pageNumber']
+    queryParameters['pageNumber'] = parameters['pageNumber'];
   }
   if (parameters['pageSize'] !== undefined) {
-    queryParameters['pageSize'] = parameters['pageSize']
+    queryParameters['pageSize'] = parameters['pageSize'];
   }
   if (parameters['searchCode'] !== undefined) {
-    queryParameters['search_code'] = parameters['searchCode']
+    queryParameters['search_code'] = parameters['searchCode'];
   }
   if (parameters['searchCreateDateBegin'] !== undefined) {
-    queryParameters['search_createDateBegin'] = parameters['searchCreateDateBegin']
+    queryParameters['search_createDateBegin'] = parameters['searchCreateDateBegin'];
   }
   if (parameters['searchCreateDateEnd'] !== undefined) {
-    queryParameters['search_createDateEnd'] = parameters['searchCreateDateEnd']
+    queryParameters['search_createDateEnd'] = parameters['searchCreateDateEnd'];
   }
   if (parameters['searchDescription'] !== undefined) {
-    queryParameters['search_description'] = parameters['searchDescription']
+    queryParameters['search_description'] = parameters['searchDescription'];
   }
   if (parameters['searchIsEnable'] !== undefined) {
-    queryParameters['search_isEnable'] = parameters['searchIsEnable']
+    queryParameters['search_isEnable'] = parameters['searchIsEnable'];
   }
   if (parameters['searchMethod'] !== undefined) {
-    queryParameters['search_method'] = parameters['searchMethod']
+    queryParameters['search_method'] = parameters['searchMethod'];
   }
   if (parameters['searchName'] !== undefined) {
-    queryParameters['search_name'] = parameters['searchName']
+    queryParameters['search_name'] = parameters['searchName'];
   }
   if (parameters['searchParentCode'] !== undefined) {
-    queryParameters['search_parentCode'] = parameters['searchParentCode']
+    queryParameters['search_parentCode'] = parameters['searchParentCode'];
   }
   if (parameters['searchParentId'] !== undefined) {
-    queryParameters['search_parentId'] = parameters['searchParentId']
+    queryParameters['search_parentId'] = parameters['searchParentId'];
   }
   if (parameters['searchParentName'] !== undefined) {
-    queryParameters['search_parentName'] = parameters['searchParentName']
+    queryParameters['search_parentName'] = parameters['searchParentName'];
   }
   if (parameters['searchUrl'] !== undefined) {
-    queryParameters['search_url'] = parameters['searchUrl']
+    queryParameters['search_url'] = parameters['searchUrl'];
   }
   if (parameters['sort'] !== undefined) {
-    queryParameters['sort'] = parameters['sort']
+    queryParameters['sort'] = parameters['sort'];
   }
   if (parameters.$queryParameters) {
-    Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-      queryParameters[parameterName] = parameters.$queryParameters[parameterName]
-    })
+    Object.keys(parameters.$queryParameters).forEach(function (parameterName) {
+      queryParameters[parameterName] = parameters.$queryParameters[parameterName];
+    });
   }
-  let keys = Object.keys(queryParameters)
-  return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '')
-}
+  let keys = Object.keys(queryParameters);
+  return (
+    domain +
+    path +
+    (keys.length > 0 ? '?' + keys.map((key) => key + '=' + encodeURIComponent(queryParameters[key])).join('&') : '')
+  );
+};
 /**
  * 成功：code=201，失败：code!=201
  * request: createApi
@@ -460,41 +488,45 @@ export const listApisURL = function(parameters = {}) {
  * raw_url: createApi_RAW_URL
  * @param body - 后台接口实体参数
  */
-export const createApi = function(parameters = {}) {
-  const domain = parameters.$domain ? parameters.$domain : getDomain()
-  const config = parameters.$config
-  let path = '/gateway-management/api/interfaces'
-  let body
-  let queryParameters = {}
-  let form = {}
+export const createApi = function (parameters = {}) {
+  const domain = parameters.$domain ? parameters.$domain : getDomain();
+  const config = parameters.$config;
+  let path = '/gateway-management/api/interfaces';
+  let body;
+  let queryParameters = {};
+  let form = {};
   if (parameters['body'] !== undefined) {
-    body = parameters['body']
+    body = parameters['body'];
   }
   if (parameters.$queryParameters) {
-    Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-      queryParameters[parameterName] = parameters.$queryParameters[parameterName]
+    Object.keys(parameters.$queryParameters).forEach(function (parameterName) {
+      queryParameters[parameterName] = parameters.$queryParameters[parameterName];
     });
   }
-  return request('post', domain + path, body, queryParameters, form, config)
-}
-export const createApi_RAW_URL = function() {
-  return '/gateway-management/api/interfaces'
-}
-export const createApi_TYPE = function() {
-  return 'post'
-}
-export const createApiURL = function(parameters = {}) {
-  let queryParameters = {}
-  const domain = parameters.$domain ? parameters.$domain : getDomain()
-  let path = '/gateway-management/api/interfaces'
+  return request('post', domain + path, body, queryParameters, form, config);
+};
+export const createApi_RAW_URL = function () {
+  return '/gateway-management/api/interfaces';
+};
+export const createApi_TYPE = function () {
+  return 'post';
+};
+export const createApiURL = function (parameters = {}) {
+  let queryParameters = {};
+  const domain = parameters.$domain ? parameters.$domain : getDomain();
+  let path = '/gateway-management/api/interfaces';
   if (parameters.$queryParameters) {
-    Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-      queryParameters[parameterName] = parameters.$queryParameters[parameterName]
-    })
+    Object.keys(parameters.$queryParameters).forEach(function (parameterName) {
+      queryParameters[parameterName] = parameters.$queryParameters[parameterName];
+    });
   }
-  let keys = Object.keys(queryParameters)
-  return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '')
-}
+  let keys = Object.keys(queryParameters);
+  return (
+    domain +
+    path +
+    (keys.length > 0 ? '?' + keys.map((key) => key + '=' + encodeURIComponent(queryParameters[key])).join('&') : '')
+  );
+};
 /**
  * 成功：code=200，data对象为接口树形结构，失败：code!=200
  * request: apiTree
@@ -513,104 +545,108 @@ export const createApiURL = function(parameters = {}) {
  * @param searchParentName - 查询条件:上级后台接口名称，模糊匹配
  * @param searchUrl - 查询条件:后台接口地址，模糊匹配
  */
-export const apiTree = function(parameters = {}) {
-  const domain = parameters.$domain ? parameters.$domain : getDomain()
-  const config = parameters.$config
-  let path = '/gateway-management/api/interfaces/tree'
-  let body
-  let queryParameters = {}
-  let form = {}
+export const apiTree = function (parameters = {}) {
+  const domain = parameters.$domain ? parameters.$domain : getDomain();
+  const config = parameters.$config;
+  let path = '/gateway-management/api/interfaces/tree';
+  let body;
+  let queryParameters = {};
+  let form = {};
   if (parameters['searchCode'] !== undefined) {
-    queryParameters['search_code'] = parameters['searchCode']
+    queryParameters['search_code'] = parameters['searchCode'];
   }
   if (parameters['searchCreateDateBegin'] !== undefined) {
-    queryParameters['search_createDateBegin'] = parameters['searchCreateDateBegin']
+    queryParameters['search_createDateBegin'] = parameters['searchCreateDateBegin'];
   }
   if (parameters['searchCreateDateEnd'] !== undefined) {
-    queryParameters['search_createDateEnd'] = parameters['searchCreateDateEnd']
+    queryParameters['search_createDateEnd'] = parameters['searchCreateDateEnd'];
   }
   if (parameters['searchDescription'] !== undefined) {
-    queryParameters['search_description'] = parameters['searchDescription']
+    queryParameters['search_description'] = parameters['searchDescription'];
   }
   if (parameters['searchIsEnable'] !== undefined) {
-    queryParameters['search_isEnable'] = parameters['searchIsEnable']
+    queryParameters['search_isEnable'] = parameters['searchIsEnable'];
   }
   if (parameters['searchMethod'] !== undefined) {
-    queryParameters['search_method'] = parameters['searchMethod']
+    queryParameters['search_method'] = parameters['searchMethod'];
   }
   if (parameters['searchName'] !== undefined) {
-    queryParameters['search_name'] = parameters['searchName']
+    queryParameters['search_name'] = parameters['searchName'];
   }
   if (parameters['searchParentCode'] !== undefined) {
-    queryParameters['search_parentCode'] = parameters['searchParentCode']
+    queryParameters['search_parentCode'] = parameters['searchParentCode'];
   }
   if (parameters['searchParentId'] !== undefined) {
-    queryParameters['search_parentId'] = parameters['searchParentId']
+    queryParameters['search_parentId'] = parameters['searchParentId'];
   }
   if (parameters['searchParentName'] !== undefined) {
-    queryParameters['search_parentName'] = parameters['searchParentName']
+    queryParameters['search_parentName'] = parameters['searchParentName'];
   }
   if (parameters['searchUrl'] !== undefined) {
-    queryParameters['search_url'] = parameters['searchUrl']
+    queryParameters['search_url'] = parameters['searchUrl'];
   }
   if (parameters.$queryParameters) {
-    Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-      queryParameters[parameterName] = parameters.$queryParameters[parameterName]
+    Object.keys(parameters.$queryParameters).forEach(function (parameterName) {
+      queryParameters[parameterName] = parameters.$queryParameters[parameterName];
     });
   }
-  return request('get', domain + path, body, queryParameters, form, config)
-}
-export const apiTree_RAW_URL = function() {
-  return '/gateway-management/api/interfaces/tree'
-}
-export const apiTree_TYPE = function() {
-  return 'get'
-}
-export const apiTreeURL = function(parameters = {}) {
-  let queryParameters = {}
-  const domain = parameters.$domain ? parameters.$domain : getDomain()
-  let path = '/gateway-management/api/interfaces/tree'
+  return request('get', domain + path, body, queryParameters, form, config);
+};
+export const apiTree_RAW_URL = function () {
+  return '/gateway-management/api/interfaces/tree';
+};
+export const apiTree_TYPE = function () {
+  return 'get';
+};
+export const apiTreeURL = function (parameters = {}) {
+  let queryParameters = {};
+  const domain = parameters.$domain ? parameters.$domain : getDomain();
+  let path = '/gateway-management/api/interfaces/tree';
   if (parameters['searchCode'] !== undefined) {
-    queryParameters['search_code'] = parameters['searchCode']
+    queryParameters['search_code'] = parameters['searchCode'];
   }
   if (parameters['searchCreateDateBegin'] !== undefined) {
-    queryParameters['search_createDateBegin'] = parameters['searchCreateDateBegin']
+    queryParameters['search_createDateBegin'] = parameters['searchCreateDateBegin'];
   }
   if (parameters['searchCreateDateEnd'] !== undefined) {
-    queryParameters['search_createDateEnd'] = parameters['searchCreateDateEnd']
+    queryParameters['search_createDateEnd'] = parameters['searchCreateDateEnd'];
   }
   if (parameters['searchDescription'] !== undefined) {
-    queryParameters['search_description'] = parameters['searchDescription']
+    queryParameters['search_description'] = parameters['searchDescription'];
   }
   if (parameters['searchIsEnable'] !== undefined) {
-    queryParameters['search_isEnable'] = parameters['searchIsEnable']
+    queryParameters['search_isEnable'] = parameters['searchIsEnable'];
   }
   if (parameters['searchMethod'] !== undefined) {
-    queryParameters['search_method'] = parameters['searchMethod']
+    queryParameters['search_method'] = parameters['searchMethod'];
   }
   if (parameters['searchName'] !== undefined) {
-    queryParameters['search_name'] = parameters['searchName']
+    queryParameters['search_name'] = parameters['searchName'];
   }
   if (parameters['searchParentCode'] !== undefined) {
-    queryParameters['search_parentCode'] = parameters['searchParentCode']
+    queryParameters['search_parentCode'] = parameters['searchParentCode'];
   }
   if (parameters['searchParentId'] !== undefined) {
-    queryParameters['search_parentId'] = parameters['searchParentId']
+    queryParameters['search_parentId'] = parameters['searchParentId'];
   }
   if (parameters['searchParentName'] !== undefined) {
-    queryParameters['search_parentName'] = parameters['searchParentName']
+    queryParameters['search_parentName'] = parameters['searchParentName'];
   }
   if (parameters['searchUrl'] !== undefined) {
-    queryParameters['search_url'] = parameters['searchUrl']
+    queryParameters['search_url'] = parameters['searchUrl'];
   }
   if (parameters.$queryParameters) {
-    Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-      queryParameters[parameterName] = parameters.$queryParameters[parameterName]
-    })
+    Object.keys(parameters.$queryParameters).forEach(function (parameterName) {
+      queryParameters[parameterName] = parameters.$queryParameters[parameterName];
+    });
   }
-  let keys = Object.keys(queryParameters)
-  return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '')
-}
+  let keys = Object.keys(queryParameters);
+  return (
+    domain +
+    path +
+    (keys.length > 0 ? '?' + keys.map((key) => key + '=' + encodeURIComponent(queryParameters[key])).join('&') : '')
+  );
+};
 /**
  * 成功：code=0，data对象为结果数据，失败：code!=0
  * request: loadApiById
@@ -619,43 +655,47 @@ export const apiTreeURL = function(parameters = {}) {
  * raw_url: loadApiById_RAW_URL
  * @param id - 后台接口ID
  */
-export const loadApiById = function(parameters = {}) {
-  const domain = parameters.$domain ? parameters.$domain : getDomain()
-  const config = parameters.$config
-  let path = '/gateway-management/api/interfaces/{id}'
-  let body
-  let queryParameters = {}
-  let form = {}
-  path = path.replace('{id}', `${parameters['id']}`)
+export const loadApiById = function (parameters = {}) {
+  const domain = parameters.$domain ? parameters.$domain : getDomain();
+  const config = parameters.$config;
+  let path = '/gateway-management/api/interfaces/{id}';
+  let body;
+  let queryParameters = {};
+  let form = {};
+  path = path.replace('{id}', `${parameters['id']}`);
   if (parameters['id'] === undefined) {
-    return Promise.reject(new Error('Missing required  parameter: id'))
+    return Promise.reject(new Error('Missing required  parameter: id'));
   }
   if (parameters.$queryParameters) {
-    Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-      queryParameters[parameterName] = parameters.$queryParameters[parameterName]
+    Object.keys(parameters.$queryParameters).forEach(function (parameterName) {
+      queryParameters[parameterName] = parameters.$queryParameters[parameterName];
     });
   }
-  return request('get', domain + path, body, queryParameters, form, config)
-}
-export const loadApiById_RAW_URL = function() {
-  return '/gateway-management/api/interfaces/{id}'
-}
-export const loadApiById_TYPE = function() {
-  return 'get'
-}
-export const loadApiByIdURL = function(parameters = {}) {
-  let queryParameters = {}
-  const domain = parameters.$domain ? parameters.$domain : getDomain()
-  let path = '/gateway-management/api/interfaces/{id}'
-  path = path.replace('{id}', `${parameters['id']}`)
+  return request('get', domain + path, body, queryParameters, form, config);
+};
+export const loadApiById_RAW_URL = function () {
+  return '/gateway-management/api/interfaces/{id}';
+};
+export const loadApiById_TYPE = function () {
+  return 'get';
+};
+export const loadApiByIdURL = function (parameters = {}) {
+  let queryParameters = {};
+  const domain = parameters.$domain ? parameters.$domain : getDomain();
+  let path = '/gateway-management/api/interfaces/{id}';
+  path = path.replace('{id}', `${parameters['id']}`);
   if (parameters.$queryParameters) {
-    Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-      queryParameters[parameterName] = parameters.$queryParameters[parameterName]
-    })
+    Object.keys(parameters.$queryParameters).forEach(function (parameterName) {
+      queryParameters[parameterName] = parameters.$queryParameters[parameterName];
+    });
   }
-  let keys = Object.keys(queryParameters)
-  return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '')
-}
+  let keys = Object.keys(queryParameters);
+  return (
+    domain +
+    path +
+    (keys.length > 0 ? '?' + keys.map((key) => key + '=' + encodeURIComponent(queryParameters[key])).join('&') : '')
+  );
+};
 /**
  * 成功：code=200，失败：code!=200
  * request: updateApi
@@ -665,46 +705,50 @@ export const loadApiByIdURL = function(parameters = {}) {
  * @param body - 后台接口实体参数
  * @param id - 后台接口id
  */
-export const updateApi = function(parameters = {}) {
-  const domain = parameters.$domain ? parameters.$domain : getDomain()
-  const config = parameters.$config
-  let path = '/gateway-management/api/interfaces/{id}'
-  let body
-  let queryParameters = {}
-  let form = {}
+export const updateApi = function (parameters = {}) {
+  const domain = parameters.$domain ? parameters.$domain : getDomain();
+  const config = parameters.$config;
+  let path = '/gateway-management/api/interfaces/{id}';
+  let body;
+  let queryParameters = {};
+  let form = {};
   if (parameters['body'] !== undefined) {
-    body = parameters['body']
+    body = parameters['body'];
   }
-  path = path.replace('{id}', `${parameters['id']}`)
+  path = path.replace('{id}', `${parameters['id']}`);
   if (parameters['id'] === undefined) {
-    return Promise.reject(new Error('Missing required  parameter: id'))
+    return Promise.reject(new Error('Missing required  parameter: id'));
   }
   if (parameters.$queryParameters) {
-    Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-      queryParameters[parameterName] = parameters.$queryParameters[parameterName]
+    Object.keys(parameters.$queryParameters).forEach(function (parameterName) {
+      queryParameters[parameterName] = parameters.$queryParameters[parameterName];
     });
   }
-  return request('put', domain + path, body, queryParameters, form, config)
-}
-export const updateApi_RAW_URL = function() {
-  return '/gateway-management/api/interfaces/{id}'
-}
-export const updateApi_TYPE = function() {
-  return 'put'
-}
-export const updateApiURL = function(parameters = {}) {
-  let queryParameters = {}
-  const domain = parameters.$domain ? parameters.$domain : getDomain()
-  let path = '/gateway-management/api/interfaces/{id}'
-  path = path.replace('{id}', `${parameters['id']}`)
+  return request('put', domain + path, body, queryParameters, form, config);
+};
+export const updateApi_RAW_URL = function () {
+  return '/gateway-management/api/interfaces/{id}';
+};
+export const updateApi_TYPE = function () {
+  return 'put';
+};
+export const updateApiURL = function (parameters = {}) {
+  let queryParameters = {};
+  const domain = parameters.$domain ? parameters.$domain : getDomain();
+  let path = '/gateway-management/api/interfaces/{id}';
+  path = path.replace('{id}', `${parameters['id']}`);
   if (parameters.$queryParameters) {
-    Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-      queryParameters[parameterName] = parameters.$queryParameters[parameterName]
-    })
+    Object.keys(parameters.$queryParameters).forEach(function (parameterName) {
+      queryParameters[parameterName] = parameters.$queryParameters[parameterName];
+    });
   }
-  let keys = Object.keys(queryParameters)
-  return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '')
-}
+  let keys = Object.keys(queryParameters);
+  return (
+    domain +
+    path +
+    (keys.length > 0 ? '?' + keys.map((key) => key + '=' + encodeURIComponent(queryParameters[key])).join('&') : '')
+  );
+};
 /**
  * 成功：code=0，data对象为结果数据，失败：code!=0
  * request: deleteApiById
@@ -713,43 +757,47 @@ export const updateApiURL = function(parameters = {}) {
  * raw_url: deleteApiById_RAW_URL
  * @param id - 后台接口ID
  */
-export const deleteApiById = function(parameters = {}) {
-  const domain = parameters.$domain ? parameters.$domain : getDomain()
-  const config = parameters.$config
-  let path = '/gateway-management/api/interfaces/{id}'
-  let body
-  let queryParameters = {}
-  let form = {}
-  path = path.replace('{id}', `${parameters['id']}`)
+export const deleteApiById = function (parameters = {}) {
+  const domain = parameters.$domain ? parameters.$domain : getDomain();
+  const config = parameters.$config;
+  let path = '/gateway-management/api/interfaces/{id}';
+  let body;
+  let queryParameters = {};
+  let form = {};
+  path = path.replace('{id}', `${parameters['id']}`);
   if (parameters['id'] === undefined) {
-    return Promise.reject(new Error('Missing required  parameter: id'))
+    return Promise.reject(new Error('Missing required  parameter: id'));
   }
   if (parameters.$queryParameters) {
-    Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-      queryParameters[parameterName] = parameters.$queryParameters[parameterName]
+    Object.keys(parameters.$queryParameters).forEach(function (parameterName) {
+      queryParameters[parameterName] = parameters.$queryParameters[parameterName];
     });
   }
-  return request('delete', domain + path, body, queryParameters, form, config)
-}
-export const deleteApiById_RAW_URL = function() {
-  return '/gateway-management/api/interfaces/{id}'
-}
-export const deleteApiById_TYPE = function() {
-  return 'delete'
-}
-export const deleteApiByIdURL = function(parameters = {}) {
-  let queryParameters = {}
-  const domain = parameters.$domain ? parameters.$domain : getDomain()
-  let path = '/gateway-management/api/interfaces/{id}'
-  path = path.replace('{id}', `${parameters['id']}`)
+  return request('delete', domain + path, body, queryParameters, form, config);
+};
+export const deleteApiById_RAW_URL = function () {
+  return '/gateway-management/api/interfaces/{id}';
+};
+export const deleteApiById_TYPE = function () {
+  return 'delete';
+};
+export const deleteApiByIdURL = function (parameters = {}) {
+  let queryParameters = {};
+  const domain = parameters.$domain ? parameters.$domain : getDomain();
+  let path = '/gateway-management/api/interfaces/{id}';
+  path = path.replace('{id}', `${parameters['id']}`);
   if (parameters.$queryParameters) {
-    Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-      queryParameters[parameterName] = parameters.$queryParameters[parameterName]
-    })
+    Object.keys(parameters.$queryParameters).forEach(function (parameterName) {
+      queryParameters[parameterName] = parameters.$queryParameters[parameterName];
+    });
   }
-  let keys = Object.keys(queryParameters)
-  return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '')
-}
+  let keys = Object.keys(queryParameters);
+  return (
+    domain +
+    path +
+    (keys.length > 0 ? '?' + keys.map((key) => key + '=' + encodeURIComponent(queryParameters[key])).join('&') : '')
+  );
+};
 /**
  * 成功：code=200，失败：code!=200
  * request: updateApiPatch
@@ -759,46 +807,50 @@ export const deleteApiByIdURL = function(parameters = {}) {
  * @param body - 后台接口实体参数
  * @param id - 后台接口id
  */
-export const updateApiPatch = function(parameters = {}) {
-  const domain = parameters.$domain ? parameters.$domain : getDomain()
-  const config = parameters.$config
-  let path = '/gateway-management/api/interfaces/{id}'
-  let body
-  let queryParameters = {}
-  let form = {}
+export const updateApiPatch = function (parameters = {}) {
+  const domain = parameters.$domain ? parameters.$domain : getDomain();
+  const config = parameters.$config;
+  let path = '/gateway-management/api/interfaces/{id}';
+  let body;
+  let queryParameters = {};
+  let form = {};
   if (parameters['body'] !== undefined) {
-    body = parameters['body']
+    body = parameters['body'];
   }
-  path = path.replace('{id}', `${parameters['id']}`)
+  path = path.replace('{id}', `${parameters['id']}`);
   if (parameters['id'] === undefined) {
-    return Promise.reject(new Error('Missing required  parameter: id'))
+    return Promise.reject(new Error('Missing required  parameter: id'));
   }
   if (parameters.$queryParameters) {
-    Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-      queryParameters[parameterName] = parameters.$queryParameters[parameterName]
+    Object.keys(parameters.$queryParameters).forEach(function (parameterName) {
+      queryParameters[parameterName] = parameters.$queryParameters[parameterName];
     });
   }
-  return request('patch', domain + path, body, queryParameters, form, config)
-}
-export const updateApiPatch_RAW_URL = function() {
-  return '/gateway-management/api/interfaces/{id}'
-}
-export const updateApiPatch_TYPE = function() {
-  return 'patch'
-}
-export const updateApiPatchURL = function(parameters = {}) {
-  let queryParameters = {}
-  const domain = parameters.$domain ? parameters.$domain : getDomain()
-  let path = '/gateway-management/api/interfaces/{id}'
-  path = path.replace('{id}', `${parameters['id']}`)
+  return request('patch', domain + path, body, queryParameters, form, config);
+};
+export const updateApiPatch_RAW_URL = function () {
+  return '/gateway-management/api/interfaces/{id}';
+};
+export const updateApiPatch_TYPE = function () {
+  return 'patch';
+};
+export const updateApiPatchURL = function (parameters = {}) {
+  let queryParameters = {};
+  const domain = parameters.$domain ? parameters.$domain : getDomain();
+  let path = '/gateway-management/api/interfaces/{id}';
+  path = path.replace('{id}', `${parameters['id']}`);
   if (parameters.$queryParameters) {
-    Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-      queryParameters[parameterName] = parameters.$queryParameters[parameterName]
-    })
+    Object.keys(parameters.$queryParameters).forEach(function (parameterName) {
+      queryParameters[parameterName] = parameters.$queryParameters[parameterName];
+    });
   }
-  let keys = Object.keys(queryParameters)
-  return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '')
-}
+  let keys = Object.keys(queryParameters);
+  return (
+    domain +
+    path +
+    (keys.length > 0 ? '?' + keys.map((key) => key + '=' + encodeURIComponent(queryParameters[key])).join('&') : '')
+  );
+};
 /**
 * 排序属性：
 成功：code=200，data对象为包含分页信息的列表，失败：code!=200
@@ -817,98 +869,102 @@ export const updateApiPatchURL = function(parameters = {}) {
      * @param searchUrl - 查询条件:URL地址，等于
      * @param sort - 排序规则，格式: 字段名[,asc|desc]，默认升序，支持多字段排序
 */
-export const listResources = function(parameters = {}) {
-  const domain = parameters.$domain ? parameters.$domain : getDomain()
-  const config = parameters.$config
-  let path = '/gateway-management/api/resources'
-  let body
-  let queryParameters = {}
-  let form = {}
+export const listResources = function (parameters = {}) {
+  const domain = parameters.$domain ? parameters.$domain : getDomain();
+  const config = parameters.$config;
+  let path = '/gateway-management/api/resources';
+  let body;
+  let queryParameters = {};
+  let form = {};
   if (parameters['pageNumber'] !== undefined) {
-    queryParameters['pageNumber'] = parameters['pageNumber']
+    queryParameters['pageNumber'] = parameters['pageNumber'];
   }
   if (parameters['pageSize'] !== undefined) {
-    queryParameters['pageSize'] = parameters['pageSize']
+    queryParameters['pageSize'] = parameters['pageSize'];
   }
   if (parameters['searchCode'] !== undefined) {
-    queryParameters['search_code'] = parameters['searchCode']
+    queryParameters['search_code'] = parameters['searchCode'];
   }
   if (parameters['searchDescription'] !== undefined) {
-    queryParameters['search_description'] = parameters['searchDescription']
+    queryParameters['search_description'] = parameters['searchDescription'];
   }
   if (parameters['searchName'] !== undefined) {
-    queryParameters['search_name'] = parameters['searchName']
+    queryParameters['search_name'] = parameters['searchName'];
   }
   if (parameters['searchService'] !== undefined) {
-    queryParameters['search_service'] = parameters['searchService']
+    queryParameters['search_service'] = parameters['searchService'];
   }
   if (parameters['searchSortIndex'] !== undefined) {
-    queryParameters['search_sortIndex'] = parameters['searchSortIndex']
+    queryParameters['search_sortIndex'] = parameters['searchSortIndex'];
   }
   if (parameters['searchType'] !== undefined) {
-    queryParameters['search_type'] = parameters['searchType']
+    queryParameters['search_type'] = parameters['searchType'];
   }
   if (parameters['searchUrl'] !== undefined) {
-    queryParameters['search_url'] = parameters['searchUrl']
+    queryParameters['search_url'] = parameters['searchUrl'];
   }
   if (parameters['sort'] !== undefined) {
-    queryParameters['sort'] = parameters['sort']
+    queryParameters['sort'] = parameters['sort'];
   }
   if (parameters.$queryParameters) {
-    Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-      queryParameters[parameterName] = parameters.$queryParameters[parameterName]
+    Object.keys(parameters.$queryParameters).forEach(function (parameterName) {
+      queryParameters[parameterName] = parameters.$queryParameters[parameterName];
     });
   }
-  return request('get', domain + path, body, queryParameters, form, config)
-}
-export const listResources_RAW_URL = function() {
-  return '/gateway-management/api/resources'
-}
-export const listResources_TYPE = function() {
-  return 'get'
-}
-export const listResourcesURL = function(parameters = {}) {
-  let queryParameters = {}
-  const domain = parameters.$domain ? parameters.$domain : getDomain()
-  let path = '/gateway-management/api/resources'
+  return request('get', domain + path, body, queryParameters, form, config);
+};
+export const listResources_RAW_URL = function () {
+  return '/gateway-management/api/resources';
+};
+export const listResources_TYPE = function () {
+  return 'get';
+};
+export const listResourcesURL = function (parameters = {}) {
+  let queryParameters = {};
+  const domain = parameters.$domain ? parameters.$domain : getDomain();
+  let path = '/gateway-management/api/resources';
   if (parameters['pageNumber'] !== undefined) {
-    queryParameters['pageNumber'] = parameters['pageNumber']
+    queryParameters['pageNumber'] = parameters['pageNumber'];
   }
   if (parameters['pageSize'] !== undefined) {
-    queryParameters['pageSize'] = parameters['pageSize']
+    queryParameters['pageSize'] = parameters['pageSize'];
   }
   if (parameters['searchCode'] !== undefined) {
-    queryParameters['search_code'] = parameters['searchCode']
+    queryParameters['search_code'] = parameters['searchCode'];
   }
   if (parameters['searchDescription'] !== undefined) {
-    queryParameters['search_description'] = parameters['searchDescription']
+    queryParameters['search_description'] = parameters['searchDescription'];
   }
   if (parameters['searchName'] !== undefined) {
-    queryParameters['search_name'] = parameters['searchName']
+    queryParameters['search_name'] = parameters['searchName'];
   }
   if (parameters['searchService'] !== undefined) {
-    queryParameters['search_service'] = parameters['searchService']
+    queryParameters['search_service'] = parameters['searchService'];
   }
   if (parameters['searchSortIndex'] !== undefined) {
-    queryParameters['search_sortIndex'] = parameters['searchSortIndex']
+    queryParameters['search_sortIndex'] = parameters['searchSortIndex'];
   }
   if (parameters['searchType'] !== undefined) {
-    queryParameters['search_type'] = parameters['searchType']
+    queryParameters['search_type'] = parameters['searchType'];
   }
   if (parameters['searchUrl'] !== undefined) {
-    queryParameters['search_url'] = parameters['searchUrl']
+    queryParameters['search_url'] = parameters['searchUrl'];
   }
   if (parameters['sort'] !== undefined) {
-    queryParameters['sort'] = parameters['sort']
+    queryParameters['sort'] = parameters['sort'];
   }
   if (parameters.$queryParameters) {
-    Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-      queryParameters[parameterName] = parameters.$queryParameters[parameterName]
-    })
+    Object.keys(parameters.$queryParameters).forEach(function (parameterName) {
+      queryParameters[parameterName] = parameters.$queryParameters[parameterName];
+    });
   }
-  let keys = Object.keys(queryParameters)
-  return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '')
-}
+  let keys = Object.keys(queryParameters);
+  return (
+    domain +
+    path +
+    (keys.length > 0 ? '?' + keys.map((key) => key + '=' + encodeURIComponent(queryParameters[key])).join('&') : '')
+  );
+};
 /**
  * 成功：code=201，失败：code!=201
  * request: createResource
@@ -917,41 +973,45 @@ export const listResourcesURL = function(parameters = {}) {
  * raw_url: createResource_RAW_URL
  * @param body - 实体参数
  */
-export const createResource = function(parameters = {}) {
-  const domain = parameters.$domain ? parameters.$domain : getDomain()
-  const config = parameters.$config
-  let path = '/gateway-management/api/resources'
-  let body
-  let queryParameters = {}
-  let form = {}
+export const createResource = function (parameters = {}) {
+  const domain = parameters.$domain ? parameters.$domain : getDomain();
+  const config = parameters.$config;
+  let path = '/gateway-management/api/resources';
+  let body;
+  let queryParameters = {};
+  let form = {};
   if (parameters['body'] !== undefined) {
-    body = parameters['body']
+    body = parameters['body'];
   }
   if (parameters.$queryParameters) {
-    Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-      queryParameters[parameterName] = parameters.$queryParameters[parameterName]
+    Object.keys(parameters.$queryParameters).forEach(function (parameterName) {
+      queryParameters[parameterName] = parameters.$queryParameters[parameterName];
     });
   }
-  return request('post', domain + path, body, queryParameters, form, config)
-}
-export const createResource_RAW_URL = function() {
-  return '/gateway-management/api/resources'
-}
-export const createResource_TYPE = function() {
-  return 'post'
-}
-export const createResourceURL = function(parameters = {}) {
-  let queryParameters = {}
-  const domain = parameters.$domain ? parameters.$domain : getDomain()
-  let path = '/gateway-management/api/resources'
+  return request('post', domain + path, body, queryParameters, form, config);
+};
+export const createResource_RAW_URL = function () {
+  return '/gateway-management/api/resources';
+};
+export const createResource_TYPE = function () {
+  return 'post';
+};
+export const createResourceURL = function (parameters = {}) {
+  let queryParameters = {};
+  const domain = parameters.$domain ? parameters.$domain : getDomain();
+  let path = '/gateway-management/api/resources';
   if (parameters.$queryParameters) {
-    Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-      queryParameters[parameterName] = parameters.$queryParameters[parameterName]
-    })
+    Object.keys(parameters.$queryParameters).forEach(function (parameterName) {
+      queryParameters[parameterName] = parameters.$queryParameters[parameterName];
+    });
   }
-  let keys = Object.keys(queryParameters)
-  return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '')
-}
+  let keys = Object.keys(queryParameters);
+  return (
+    domain +
+    path +
+    (keys.length > 0 ? '?' + keys.map((key) => key + '=' + encodeURIComponent(queryParameters[key])).join('&') : '')
+  );
+};
 /**
  * 成功：code=0，data对象为信息，失败：code!=0
  * request: loadResourceById
@@ -960,43 +1020,47 @@ export const createResourceURL = function(parameters = {}) {
  * raw_url: loadResourceById_RAW_URL
  * @param id - ID
  */
-export const loadResourceById = function(parameters = {}) {
-  const domain = parameters.$domain ? parameters.$domain : getDomain()
-  const config = parameters.$config
-  let path = '/gateway-management/api/resources/{id}'
-  let body
-  let queryParameters = {}
-  let form = {}
-  path = path.replace('{id}', `${parameters['id']}`)
+export const loadResourceById = function (parameters = {}) {
+  const domain = parameters.$domain ? parameters.$domain : getDomain();
+  const config = parameters.$config;
+  let path = '/gateway-management/api/resources/{id}';
+  let body;
+  let queryParameters = {};
+  let form = {};
+  path = path.replace('{id}', `${parameters['id']}`);
   if (parameters['id'] === undefined) {
-    return Promise.reject(new Error('Missing required  parameter: id'))
+    return Promise.reject(new Error('Missing required  parameter: id'));
   }
   if (parameters.$queryParameters) {
-    Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-      queryParameters[parameterName] = parameters.$queryParameters[parameterName]
+    Object.keys(parameters.$queryParameters).forEach(function (parameterName) {
+      queryParameters[parameterName] = parameters.$queryParameters[parameterName];
     });
   }
-  return request('get', domain + path, body, queryParameters, form, config)
-}
-export const loadResourceById_RAW_URL = function() {
-  return '/gateway-management/api/resources/{id}'
-}
-export const loadResourceById_TYPE = function() {
-  return 'get'
-}
-export const loadResourceByIdURL = function(parameters = {}) {
-  let queryParameters = {}
-  const domain = parameters.$domain ? parameters.$domain : getDomain()
-  let path = '/gateway-management/api/resources/{id}'
-  path = path.replace('{id}', `${parameters['id']}`)
+  return request('get', domain + path, body, queryParameters, form, config);
+};
+export const loadResourceById_RAW_URL = function () {
+  return '/gateway-management/api/resources/{id}';
+};
+export const loadResourceById_TYPE = function () {
+  return 'get';
+};
+export const loadResourceByIdURL = function (parameters = {}) {
+  let queryParameters = {};
+  const domain = parameters.$domain ? parameters.$domain : getDomain();
+  let path = '/gateway-management/api/resources/{id}';
+  path = path.replace('{id}', `${parameters['id']}`);
   if (parameters.$queryParameters) {
-    Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-      queryParameters[parameterName] = parameters.$queryParameters[parameterName]
-    })
+    Object.keys(parameters.$queryParameters).forEach(function (parameterName) {
+      queryParameters[parameterName] = parameters.$queryParameters[parameterName];
+    });
   }
-  let keys = Object.keys(queryParameters)
-  return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '')
-}
+  let keys = Object.keys(queryParameters);
+  return (
+    domain +
+    path +
+    (keys.length > 0 ? '?' + keys.map((key) => key + '=' + encodeURIComponent(queryParameters[key])).join('&') : '')
+  );
+};
 /**
  * 成功：code=200，失败：code!=200
  * request: updateResource
@@ -1006,46 +1070,50 @@ export const loadResourceByIdURL = function(parameters = {}) {
  * @param body - 实体参数
  * @param id - ID
  */
-export const updateResource = function(parameters = {}) {
-  const domain = parameters.$domain ? parameters.$domain : getDomain()
-  const config = parameters.$config
-  let path = '/gateway-management/api/resources/{id}'
-  let body
-  let queryParameters = {}
-  let form = {}
+export const updateResource = function (parameters = {}) {
+  const domain = parameters.$domain ? parameters.$domain : getDomain();
+  const config = parameters.$config;
+  let path = '/gateway-management/api/resources/{id}';
+  let body;
+  let queryParameters = {};
+  let form = {};
   if (parameters['body'] !== undefined) {
-    body = parameters['body']
+    body = parameters['body'];
   }
-  path = path.replace('{id}', `${parameters['id']}`)
+  path = path.replace('{id}', `${parameters['id']}`);
   if (parameters['id'] === undefined) {
-    return Promise.reject(new Error('Missing required  parameter: id'))
+    return Promise.reject(new Error('Missing required  parameter: id'));
   }
   if (parameters.$queryParameters) {
-    Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-      queryParameters[parameterName] = parameters.$queryParameters[parameterName]
+    Object.keys(parameters.$queryParameters).forEach(function (parameterName) {
+      queryParameters[parameterName] = parameters.$queryParameters[parameterName];
     });
   }
-  return request('put', domain + path, body, queryParameters, form, config)
-}
-export const updateResource_RAW_URL = function() {
-  return '/gateway-management/api/resources/{id}'
-}
-export const updateResource_TYPE = function() {
-  return 'put'
-}
-export const updateResourceURL = function(parameters = {}) {
-  let queryParameters = {}
-  const domain = parameters.$domain ? parameters.$domain : getDomain()
-  let path = '/gateway-management/api/resources/{id}'
-  path = path.replace('{id}', `${parameters['id']}`)
+  return request('put', domain + path, body, queryParameters, form, config);
+};
+export const updateResource_RAW_URL = function () {
+  return '/gateway-management/api/resources/{id}';
+};
+export const updateResource_TYPE = function () {
+  return 'put';
+};
+export const updateResourceURL = function (parameters = {}) {
+  let queryParameters = {};
+  const domain = parameters.$domain ? parameters.$domain : getDomain();
+  let path = '/gateway-management/api/resources/{id}';
+  path = path.replace('{id}', `${parameters['id']}`);
   if (parameters.$queryParameters) {
-    Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-      queryParameters[parameterName] = parameters.$queryParameters[parameterName]
-    })
+    Object.keys(parameters.$queryParameters).forEach(function (parameterName) {
+      queryParameters[parameterName] = parameters.$queryParameters[parameterName];
+    });
   }
-  let keys = Object.keys(queryParameters)
-  return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '')
-}
+  let keys = Object.keys(queryParameters);
+  return (
+    domain +
+    path +
+    (keys.length > 0 ? '?' + keys.map((key) => key + '=' + encodeURIComponent(queryParameters[key])).join('&') : '')
+  );
+};
 /**
  * 成功：code=0，失败：code!=0
  * request: deleteResourceById
@@ -1054,40 +1122,44 @@ export const updateResourceURL = function(parameters = {}) {
  * raw_url: deleteResourceById_RAW_URL
  * @param id - ID
  */
-export const deleteResourceById = function(parameters = {}) {
-  const domain = parameters.$domain ? parameters.$domain : getDomain()
-  const config = parameters.$config
-  let path = '/gateway-management/api/resources/{id}'
-  let body
-  let queryParameters = {}
-  let form = {}
-  path = path.replace('{id}', `${parameters['id']}`)
+export const deleteResourceById = function (parameters = {}) {
+  const domain = parameters.$domain ? parameters.$domain : getDomain();
+  const config = parameters.$config;
+  let path = '/gateway-management/api/resources/{id}';
+  let body;
+  let queryParameters = {};
+  let form = {};
+  path = path.replace('{id}', `${parameters['id']}`);
   if (parameters['id'] === undefined) {
-    return Promise.reject(new Error('Missing required  parameter: id'))
+    return Promise.reject(new Error('Missing required  parameter: id'));
   }
   if (parameters.$queryParameters) {
-    Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-      queryParameters[parameterName] = parameters.$queryParameters[parameterName]
+    Object.keys(parameters.$queryParameters).forEach(function (parameterName) {
+      queryParameters[parameterName] = parameters.$queryParameters[parameterName];
     });
   }
-  return request('delete', domain + path, body, queryParameters, form, config)
-}
-export const deleteResourceById_RAW_URL = function() {
-  return '/gateway-management/api/resources/{id}'
-}
-export const deleteResourceById_TYPE = function() {
-  return 'delete'
-}
-export const deleteResourceByIdURL = function(parameters = {}) {
-  let queryParameters = {}
-  const domain = parameters.$domain ? parameters.$domain : getDomain()
-  let path = '/gateway-management/api/resources/{id}'
-  path = path.replace('{id}', `${parameters['id']}`)
+  return request('delete', domain + path, body, queryParameters, form, config);
+};
+export const deleteResourceById_RAW_URL = function () {
+  return '/gateway-management/api/resources/{id}';
+};
+export const deleteResourceById_TYPE = function () {
+  return 'delete';
+};
+export const deleteResourceByIdURL = function (parameters = {}) {
+  let queryParameters = {};
+  const domain = parameters.$domain ? parameters.$domain : getDomain();
+  let path = '/gateway-management/api/resources/{id}';
+  path = path.replace('{id}', `${parameters['id']}`);
   if (parameters.$queryParameters) {
-    Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
-      queryParameters[parameterName] = parameters.$queryParameters[parameterName]
-    })
+    Object.keys(parameters.$queryParameters).forEach(function (parameterName) {
+      queryParameters[parameterName] = parameters.$queryParameters[parameterName];
+    });
   }
-  let keys = Object.keys(queryParameters)
-  return domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '')
-}
+  let keys = Object.keys(queryParameters);
+  return (
+    domain +
+    path +
+    (keys.length > 0 ? '?' + keys.map((key) => key + '=' + encodeURIComponent(queryParameters[key])).join('&') : '')
+  );
+};

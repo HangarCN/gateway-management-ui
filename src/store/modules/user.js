@@ -1,9 +1,8 @@
 import storage from 'store';
-import { loginByUsername } from '@/api/auth';
+import { loginByUsername, logout } from '@/api/auth';
 import { userInfo } from '@/api';
 import { ACCESS_TOKEN } from '@/store/mutation-types';
 import { welcome } from '@/utils/util';
-import VueCookies from 'vue-cookies';
 const user = {
   state: {
     // 统一配置分页的选择条数
@@ -44,13 +43,12 @@ const user = {
     Login({ commit }, { username, password }) {
       return new Promise((resolve, reject) => {
         loginByUsername(username, password)
-          .then(result => {
+          .then((result) => {
             storage.set(ACCESS_TOKEN, result.access_token, 7 * 24 * 60 * 60 * 1000);
-            VueCookies.set(ACCESS_TOKEN, result.access_token, -1);
             commit('SET_TOKEN', result.access_token);
             resolve(result);
           })
-          .catch(error => {
+          .catch((error) => {
             reject(error);
           });
       });
@@ -60,7 +58,7 @@ const user = {
     GetInfo({ commit }) {
       return new Promise((resolve, reject) => {
         userInfo()
-          .then(response => {
+          .then((response) => {
             if (response.code === 200 && response.data) {
               const result = response.data;
               if (result.roles && result.roles.length > 0 && result.permissions && result.permissions.length > 0) {
@@ -79,7 +77,7 @@ const user = {
               reject(new Error('获取用户信息失败'));
             }
           })
-          .catch(error => {
+          .catch((error) => {
             reject(error);
           });
       });
@@ -87,13 +85,19 @@ const user = {
 
     // 登出
     Logout({ commit, state }) {
-      return new Promise(resolve => {
-        commit('SET_TOKEN', '');
-        commit('SET_ROLES', []);
-        commit('SET_PERMISSIONS', []);
-        storage.remove(ACCESS_TOKEN);
-        VueCookies.remove(ACCESS_TOKEN);
-        resolve();
+      return new Promise((resolve) => {
+        logout(state.token)
+          .then(() => {
+            commit('SET_TOKEN', '');
+            commit('SET_ROLES', []);
+            commit('SET_PERMISSIONS', []);
+            storage.remove(ACCESS_TOKEN);
+            resolve();
+          })
+          .catch(() => {
+            resolve();
+          })
+          .finally(() => {});
       });
     }
   }

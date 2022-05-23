@@ -4,8 +4,7 @@ const GitRevisionPlugin = require('git-revision-webpack-plugin');
 const GitRevision = new GitRevisionPlugin();
 const buildDate = JSON.stringify(new Date().toLocaleString());
 const createThemeColorReplacerPlugin = require('./config/plugin.config');
-const url = 'http://127.0.0.1:9000';
-
+const url = 'http://authorization-server:9000';
 function resolve(dir) {
   return path.join(__dirname, dir);
 }
@@ -108,14 +107,12 @@ const vueConfig = {
     // If you want to turn on the proxy, please remove the mockjs /src/main.jsL11
     proxy: {
       '/oauth2': {
+        target: process.env.VUE_APP_AUTHORIZATION_SERVER_URI || url
+      },
+      '/oauth': {
         target: url
       },
       '/gateway-management/api': {
-        target: url,
-        ws: true,
-        changeOrigin: true
-      },
-      '/unified-identity/api': {
         target: url,
         ws: true,
         changeOrigin: true
@@ -156,6 +153,7 @@ const vueConfig = {
 
 // preview.pro.loacg.com only do not use in your production;
 if (process.env.VUE_APP_PREVIEW === 'true') {
+  console.log('VUE_APP_PREVIEW', true);
   // add `ThemeColorReplacer` plugin to webpack plugins
   vueConfig.configureWebpack.plugins.push(createThemeColorReplacerPlugin());
 }
